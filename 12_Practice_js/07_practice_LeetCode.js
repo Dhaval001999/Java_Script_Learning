@@ -20,4 +20,4 @@ let reduce = function(nums, fn, init){
         acc = fn(acc, nums[i])
     }
     return acc;
-} // solution
+} // solution 
