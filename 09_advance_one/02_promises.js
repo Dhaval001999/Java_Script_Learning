@@ -101,7 +101,7 @@ consumePromiseFive()
 
 
 
-fetch('https://api.github.com/users/hiteshchoudhary')
+fetch('https://api.github.com/users/hiteshchoudhary') // ama apade fetch ne samajye che
 .then((response) => {
     return response.json()
 })
