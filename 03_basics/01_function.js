@@ -35,8 +35,8 @@ function loginUserMessage(username = "sam"){
     return `${username} just logged in`
 }
 
-// console.log(loginUserMessage("hitesh"))
-// console.log(loginUserMessage("hitesh"))
+// console.log(loginUserMessage("dhaval"))
+// console.log(loginUserMessage("dhaval"))
 
 // *******************************************************************************************************
 
@@ -47,7 +47,7 @@ function calculateCartPrice(val1, val2, ...num1){ // ama rest operator vapray an
 // console.log(calculateCartPrice(200, 400, 500, 2000))
 
 const user = {
-    username: "hitesh",
+    username: "dhaval",
     prices: 199
 }
 
