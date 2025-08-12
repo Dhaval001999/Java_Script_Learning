@@ -42,26 +42,26 @@ console.log(result1(2, 3));
 
 function composeAll(...funcs){
     return function(...values){
-        return funcs.reduce((val, fn) => fn(val), values)
+        return funcs.reduce((val, fn, index) => {
+            if(index === 0){
+                return fn(...val)
+            } // jo single value pass thay toh
+            return fn(val);
+        },values);
     }
 }
 
-const composeAll1 = (...funcs) => (...values) => funcs.reduce((val, fn) => fn(val), values) // upar j hatu aj che bt a simple function thi karyu ane aa arrow function thi karyu
 
 const result2 = composeAll(add, mulTwo, square);
-console.log(result1(2, 3));
-
-
-const result3 = composeAll1(add, mulTwo, square);
-console.log(result1(2, 3));
+console.log(result2(2,5));
 
 
 
 
-let compose = function(functions){
-    return function(x){
-        for(let i = functions.length - 1; i >= 0; i--){
-            x = functions[i](x)
-        }
-    }
-} // solution
+// let compose = function(functions){
+//     return function(x){
+//         for(let i = functions.length - 1; i >= 0; i--){
+//             x = functions[i](x)
+//         }
+//     }
+// } // solution
