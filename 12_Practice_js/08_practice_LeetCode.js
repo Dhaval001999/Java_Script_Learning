@@ -50,8 +50,6 @@ function composeAll(...funcs){
         },values);
     }
 }
-
-
 const result2 = composeAll(add, mulTwo, square);
 console.log(result2(2,5));
 
