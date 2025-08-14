@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Memoization Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f9fc;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .cache-box {
+            background: #fff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            width: 300px;
+            margin: 20px auto;
+            text-align: left;
+            min-height: 100px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .log {
+            background: #222;
+            color: #0f0;
+            padding: 10px;
+            margin-top: 20px;
+            text-align: left;
+            font-family: monospace;
+            height: 150px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Memoization Visualization</h1>
+    <p>Click a button to call the memoized sum function.</p>
+
+    <div>
+        <button onclick="callMemoSum(2,3)">memoSum(2, 3)</button>
+        <button onclick="callMemoSum(3,2)">memoSum(3, 2)</button>
+        <button onclick="callMemoSum(2,3)">memoSum(2, 3) Again</button>
+    </div>
+
+    <h3>Cache:</h3>
+    <div class="cache-box" id="cacheBox">
+        (Empty)
+    </div>
+
+    <h3>Log:</h3>
+    <div class="log" id="logBox">
+    </div>
+
+    <script>
+        function memoize(fn) {
+            const cache = {};
+
+            return function(...args) {
+                const key = JSON.stringify(args);
+                if (cache[key] !== undefined) {
+                    logMessage(`From cache: ${key} -> ${cache[key]}`);
+                    updateCacheDisplay(cache);
+                    return cache[key];
+                }
+                logMessage(`Calculating for: ${key}`);
+                const result = fn(...args);
+                cache[key] = result;
+                updateCacheDisplay(cache);
+                return result;
+            };
+        }
+
+        function sum(a, b) {
+            return a + b;
+        }
+
+        const memoSum = memoize(sum);
+
+        function callMemoSum(a, b) {
+            const result = memoSum(a, b);
+            logMessage(`Result: ${result}`);
+        }
+
+        function updateCacheDisplay(cache) {
+            const box = document.getElementById('cacheBox');
+            box.innerHTML = '';
+            for (let key in cache) {
+                box.innerHTML += `<strong>${key}</strong> : ${cache[key]}<br>`;
+            }
+            if (Object.keys(cache).length === 0) {
+                box.innerHTML = '(Empty)';
+            }
+        }
+
+        function logMessage(msg) {
+            const logBox = document.getElementById('logBox');
+            logBox.innerHTML += msg + '\n';
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+    </script>
+
+</body>
+</html>
