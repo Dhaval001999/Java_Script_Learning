@@ -1,6 +1,8 @@
+// ama apade function thi get set karyu che
+
 function User(email, password){
     this._email = email;
-    this._password = password
+    this._password = password;
 
     Object.defineProperty(this, 'email', {
         get: function(){
